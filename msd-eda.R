@@ -43,7 +43,7 @@ country_stadium<-as.data.frame(cbind(z,rawdata$Ground))
 nastadium<-unique(rawdata$Ground[is.na(z)])
 names(country_stadium)<-c("venue_country","stadium")
 
-View(cbind(z,rawdata$Ground))
+
 nastadium
 manual_country<-c("India","India","Sri Lanka","India","India","India","India","Pakistan","India","UAE","South Africa","Bangladesh",
                   "India","England","England","England","India","Sri Lanka","India")
@@ -56,16 +56,6 @@ for (i in 1:length(country_stadium$venue_country)){
   
   if (is.na(country_stadium$venue_country[i])==1){
    country_stadium$venue_country[i]<-updated_country$manual_country[country_stadium$stadium[i]==updated_country$nastadium]
-  }
-}
-
-
-for(i in 1:length(country_stadium$stadium)) {
-  t<-updated_country$manual_country[grep(country_stadium$stadium[i],updated_country$naStadium,fixed=F)]
-  if (sum(grep(country_stadium$stadium[i],updated_country$naStadium,fixed=F))==1){
-    country_stadium$country[i]<-t
-  }else {
-    country_stadium$country[i]<-country_stadium[i]
   }
 }
 
@@ -197,6 +187,5 @@ na.omit(final_data) %>%
   ggplot()+geom_point(mapping=aes(y=Runs,x=B.F,color=home_away))
  
 hist(na.omit(rawdata$Runs))
-ggsave('hist.jpeg')
 hist(na.omit(final_data$Runs))
 na.omit(final_data$Runs)
